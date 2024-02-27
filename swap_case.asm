@@ -146,11 +146,12 @@ print:
     li $v0, 4
     la $a0, newline
     syscall
+    sb $t0, 0($s0)
+    jal ConventionCheck
 
 loop2:
-    sb $t0, 0($s0)
+    
     addi $s0, $s0, 1
-    jal ConventionCheck
     j loop
 return:
     # Do not remove the "jr $ra" line below!!!
