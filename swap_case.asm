@@ -95,12 +95,7 @@ SwapCase:
 
 loop:
     lb $t0, 0($s0)    # load the current character
-    li $v0, 1
-    move $a0, $t0
-    syscall
-    beq $t0, $zero, return
-    
-    
+    beq $t0, $zero, return    
 
     # ASCII values of the characters
     li $t1, 'a'             
