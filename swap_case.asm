@@ -144,7 +144,7 @@ loop2:
     la $a0, newline
     syscall
 
-    sw $t0, 0($s0)
+    sb $t0, 0($s0)
     addi $s0, $s0, 1
     jal ConventionCheck
     j loop
