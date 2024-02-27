@@ -119,7 +119,7 @@ checkLower:
     syscall
 
     addi $t0, $t0, -32
-    j loop2
+    j print
 checkUpper:
     li $t1, 'Z'
     bgt $t0, $t1, loop2
@@ -133,9 +133,9 @@ checkUpper:
     syscall
 
     addi $t0, $t0, 32
-    j loop2
-loop2:
-    # print the new character
+    j print
+print:
+ # print the new character
 
     li $v0, 11
     move $a0, $t0
@@ -144,6 +144,7 @@ loop2:
     la $a0, newline
     syscall
 
+loop2:
     sb $t0, 0($s0)
     addi $s0, $s0, 1
     jal ConventionCheck
