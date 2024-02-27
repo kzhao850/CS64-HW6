@@ -119,6 +119,7 @@ checkLower:
     syscall
 
     addi $t0, $t0, -32
+    j loop2
 checkUpper:
     li $t1, 'Z'
     bgt $t0, $t1, loop2
@@ -132,6 +133,7 @@ checkUpper:
     syscall
 
     addi $t0, $t0, 32
+    j loop2
 loop2:
     # print the new character
 
@@ -149,5 +151,9 @@ loop2:
 return:
     # Do not remove the "jr $ra" line below!!!
     # It should be the last line in your function code!
+
+    lw $ra, 0($sp)
+    lw $s0, 4($sp)
+    addi $sp, $sp, 8 
     jr $ra
 
