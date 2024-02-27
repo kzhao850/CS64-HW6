@@ -116,6 +116,7 @@ checkLower:
     la $a0, newline
     syscall
 
+    # swap from lowercase to uppercase
     addi $t0, $t0, -32
     j print
 checkUpper:
@@ -130,22 +131,25 @@ checkUpper:
     la $a0, newline
     syscall
 
+    # swap from uppercase to lowercase
     addi $t0, $t0, 32
     j print
 print:
- # print the new character
-
+    # print the new character
     li $v0, 11
     move $a0, $t0
     syscall
     li $v0, 4
     la $a0, newline
     syscall
+
+    # Save the new character
     sb $t0, 0($s0)
+    # Call convention check
     jal ConventionCheck
 
 loop2:
-    
+    # Increment the string pointer and call loop again
     addi $s0, $s0, 1
     j loop
 return:
