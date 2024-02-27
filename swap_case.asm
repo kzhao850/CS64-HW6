@@ -88,15 +88,67 @@ Exit:
 # YOU CAN ONLY MODIFY THIS FILE FROM THIS POINT ONWARDS:
 SwapCase:
     #TODO: write your code here, $a0 stores the address of the string
-    # store $ra in the stack
-    addi $sp, $sp, -4 
+    addi $sp, $sp, -8 
     sw $ra, 0($sp)
-
+    sw $s0, 4($sp)
     move $s0, $a0   #store incoming string address
 
-    # Get the character
-    # Call something to check if its a letter and if so swap the case of its
-    # increment by 1 byte to the next character and call again
+loop:
+    lb $t0, 0($s0)    # load the current character
+    beq $t0, $zero, return
+
+    
+
+    # ASCII values of the characters
+    li $t1, 'a'             
+    li $t2, 'A'
+    bge $t0, $t1, checkLower
+    bge $t0, $t2, checkUpper
+    j loop2
+
+checkLower:
+    li $t1, 'z'
+    bgt $t0, $t1, loop2
+
+    # print original char
+    li $v0, 1
+    move $a0, $t0
+    syscall
+    li $v0, 4
+    la $a0, newline
+    syscall
+
+    addi $t0, $t0, -32
+checkUpper:
+    li $t1, 'Z'
+    bgt $t0, $t1, loop2
+
+    # print original char
+    li $v0, 1
+    move $a0, $t0
+    syscall
+    li $v0, 4
+    la $a0, newline
+    syscall
+
+    addi $t0, $t0, 32
+loop2:
+    # print the new character
+
+    # print original char
+    li $v0, 1
+    move $a0, $t0
+    syscall
+    li $v0, 4
+    la $a0, newline
+    syscall
+
+    sw $t0, 0($s0)
+    addi $s0, $s0, 1
+    jal ConventionCheck
+    j loop
+return:
     # Do not remove the "jr $ra" line below!!!
     # It should be the last line in your function code!
     jr $ra
+
