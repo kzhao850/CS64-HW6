@@ -111,7 +111,7 @@ checkLower:
     bgt $t0, $t1, loop2
 
     # print original char
-    li $v0, 4
+    li $v0, 11
     move $a0, $t0
     syscall
     li $v0, 4
@@ -124,7 +124,7 @@ checkUpper:
     bgt $t0, $t1, loop2
 
     # print original char
-    li $v0, 4
+    li $v0, 11
     move $a0, $t0
     syscall
     li $v0, 4
@@ -135,7 +135,7 @@ checkUpper:
 loop2:
     # print the new character
 
-    li $v0, 4
+    li $v0, 11
     move $a0, $t0
     syscall
     li $v0, 4
